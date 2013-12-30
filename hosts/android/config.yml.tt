@@ -1,0 +1,54 @@
+
+#----------------------------------------------------------------#
+# list of source lua directories to add to the 
+# application bundle. These are relative to your project src
+#----------------------------------------------------------------#
+
+package: com.getmoai.samples
+
+
+
+src_dir: .
+
+debug: true
+
+key_store:
+key_alias:
+key_store_password:
+key_alias_password:
+
+
+
+project_name: <%= config.name %>
+
+
+screen_orientation: landscape
+
+
+version_code: <%= config.version_code %>
+version_name: <%= config.version_name %>
+
+working_dir: lua
+asset_dirs: []
+
+extensions:
+     miscellaneous: yes
+     adcolony: no
+     billing: yes
+     chartboost: yes
+     crittercism: yes
+     facebook: yes
+     push: yes
+     tapjoy: yes
+     twitter: yes
+     tstorewall: no
+     tstoregamecenter: no
+
+icon:
+    ldpi:
+    mdpi:
+    hdpi:
+    xhdpi:
+
+run: 
+    - main.lua

@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+gem 'commander'
+gem 'rubyzip'
+gem 'ruby-progressbar'
+gem 'config_spartan'
+gem 'highline',  :git => 'git://github.com/JEG2/highline.git', :ref => 'dd24069896e07c1b946ee033845ceb0038454f32'
+gem 'ansicolor', :git=>'git://github.com/halfnelson/ansicolor.git'
+gem 'rjgit', :git=>'git://github.com/halfnelson/rjgit', :branch => 'master'

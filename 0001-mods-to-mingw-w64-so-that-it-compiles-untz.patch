@@ -1,0 +1,50 @@
+From 8feb8400ee05c937654348cd5596dffd6afd09d5 Mon Sep 17 00:00:00 2001
+From: halfnelson <dpershouse@gmail.com>
+Date: Sun, 22 Sep 2013 22:23:33 +1000
+Subject: [PATCH] mods to mingw-w64 so that it compiles untz
+
+---
+ control.h | 6 ++++++
+ guiddef.h | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/control.h b/control.h
+index 6091ca0..bfcacf4 100644
+--- a/control.h
++++ b/control.h
+@@ -190,6 +190,9 @@ extern "C"{
+     virtual HRESULT WINAPI get_RegFilterCollection(IDispatch **ppUnk) = 0;
+     virtual HRESULT WINAPI StopWhenReady(void) = 0;
+   };
++#ifdef __CRT_UUID_DECL
++		__CRT_UUID_DECL(IMediaControl, 0x56a868b1,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x0b,0xa7,0x70)
++#endif
+ #else
+   typedef struct IMediaControlVtbl {
+     BEGIN_INTERFACE
+@@ -327,6 +330,9 @@ extern "C"{
+     virtual HRESULT WINAPI SetNotifyFlags(__LONG32 lNoNotifyFlags) = 0;
+     virtual HRESULT WINAPI GetNotifyFlags(__LONG32 *lplNoNotifyFlags) = 0;
+   };
++  #ifdef __CRT_UUID_DECL
++	__CRT_UUID_DECL(IMediaEventEx, 0x56a868c0,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x0b,0xa7,0x70)
++  #endif
+ #else
+   typedef struct IMediaEventExVtbl {
+     BEGIN_INTERFACE
+diff --git a/guiddef.h b/guiddef.h
+index c5df6a0..d79d641 100644
+--- a/guiddef.h
++++ b/guiddef.h
+@@ -145,7 +145,7 @@ __inline int InlineIsEqualGUID(REFGUID rguid1,REFGUID rguid2) {
+ }
+ __inline int IsEqualGUID(REFGUID rguid1,REFGUID rguid2) { return !memcmp(&rguid1,&rguid2,sizeof(GUID)); }
+ #else
+-#define InlineIsEqualGUID(rguid1,rguid2) (((unsigned __LONG32 *) rguid1)[0]==((unsigned __LONG32 *) rguid2)[0] && ((unsigned __LONG32 *) rguid1)[1]==((unsigned __LONG32 *) rguid2)[1] && ((unsigned __LONG32 *) rguid1)[2]==((unsigned __LONG32 *) rguid2)[2] && ((unsigned __LONG32 *) rguid1)[3]==((unsigned __LONG32 *) rguid2)[3])
++#define InlineIsEqualGUID(rguid1, rguid2) ((&(rguid1)->Data1)[0] == (&(rguid2)->Data1)[0] && (&(rguid1)->Data1)[1] == (&(rguid2)->Data1)[1] && (&(rguid1)->Data1)[2] == (&(rguid2)->Data1)[2] && (&(rguid1)->Data1)[3] == (&(rguid2)->Data1)[3])
+ #define IsEqualGUID(rguid1,rguid2) (!memcmp(rguid1,rguid2,sizeof(GUID)))
+ #endif
+ 
+-- 
+1.8.3.msysgit.0
+

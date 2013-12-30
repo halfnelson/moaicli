@@ -1,0 +1,18 @@
+code_sign_identity: "iPhone Developer"
+
+app_id: "com.getmoai.samples"
+
+
+
+
+extensions:
+     adcolony: no
+     chartboost: yes
+     crittercism: yes
+     facebook: yes
+     tapjoy: no
+     notifications: yes
+     twitter: yes
+     vungle: no
+     playhaven: yes
+

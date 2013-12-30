@@ -1,0 +1,20 @@
+--- C:/Users/David/AppData/Local/moaicli/deps/emscripten/emsdk-portable/emscripten/1.7.1/cmake/Platform/Emscripten - Copy.cmake	Sun Nov 10 11:55:03 2013
++++ C:/Users/David/AppData/Local/moaicli/deps/emscripten/emsdk-portable/emscripten/1.7.1/cmake/Platform/Emscripten.cmake	Sun Nov 10 17:53:32 2013
+@@ -72,6 +72,17 @@
+ 	set(CMAKE_RANLIB "${EMSCRIPTEN_ROOT_PATH}/emranlib${EMCC_SUFFIX}")
+ endif()
+ 
++#Workaround batchfiles not being able to handle all my objects
++       
++SET(CMAKE_C_CREATE_STATIC_LIBRARY
++      "python ${EMSCRIPTEN_ROOT_PATH}/emar cr <TARGET> <LINK_FLAGS> <OBJECTS> "
++      "<CMAKE_RANLIB> <TARGET> ")
++      
++      SET(CMAKE_CXX_CREATE_STATIC_LIBRARY
++      "python ${EMSCRIPTEN_ROOT_PATH}/emar cr <TARGET> <LINK_FLAGS> <OBJECTS> "
++      "<CMAKE_RANLIB> <TARGET> ")
++   
++
+ # Don't do compiler autodetection, since we are cross-compiling.
+ include(CMakeForceCompiler)
+ CMAKE_FORCE_C_COMPILER("${CMAKE_C_COMPILER}" Clang)

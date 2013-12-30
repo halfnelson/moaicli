@@ -1,0 +1,14 @@
+--- !ruby/hash:Hashie::Mash
+android: !ruby/hash:Hashie::Mash
+  sdk_path: ~
+  ndk_path: ~
+  default_host: default
+windows:
+  default_host: glut
+ios:
+  default_host: default
+osx:
+  default_host: default
+linux:
+  default_host: default
+

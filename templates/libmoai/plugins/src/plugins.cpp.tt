@@ -1,0 +1,21 @@
+#include <stdio.h>
+extern "C" {
+	#include "lua.h"
+	#include "lauxlib.h"
+	int register_libs (lua_State *L);
+	
+	/* other plugins here */
+  <% plugins.each do |plugin| %>
+    int luaopen_<%= plugin %>(lua_State *L);
+  <% end %>
+
+
+}
+
+
+int register_libs (lua_State *L) {
+<% plugins.each do |plugin| %>
+    luaopen_<%= plugin %>(L);
+<% end %>
+	return 1;
+}

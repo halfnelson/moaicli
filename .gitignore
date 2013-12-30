@@ -1,0 +1,10 @@
+bundle/
+deps/
+cache/
+build/
+sdks/
+.bundle/
+.idea/
+lib/java/jruby-complete.jar
+package/
+dist/windows/jre/
