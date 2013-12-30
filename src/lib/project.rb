@@ -12,7 +12,7 @@ class Project
     @hosts_root = File.join(root,"hosts")
     @plugin_path = File.join(root,"plugins")
     @build_path = File.join(root,"build")
-    @distribution_root = File.join(root,"distribution")
+    @distribution_root = File.join(root,"distribute")
 
     unless File.exists?(config_file)
       bail("Not in a project directory")

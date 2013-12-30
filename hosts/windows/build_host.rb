@@ -10,8 +10,7 @@ module BuildFile
 
   def build
     build_moai('moai',build_config.modules,cmake_output,[])
-    copy_project_files(out_dir)
-    FileUtils.cp cmake_output, out_dir
+    distribute
   end
 
   def cmake_output
@@ -19,7 +18,12 @@ module BuildFile
   end
 
   def out_dir
-    File.join(build_config.build_dir,'app')
+    File.join(build_config.project.distribution_root,'windows')
+  end
+
+  def distribute
+    copy_project_files(out_dir)
+    FileUtils.cp cmake_output, out_dir
   end
 
   def copy_project_files(destination)
