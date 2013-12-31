@@ -31,7 +31,7 @@ command :build do |c|
     task = BuilderTask.new(app, project, host, options)
     status "Build", "Invoking host specific build task"
     task.build
-    task.build_config.update_digest
+    task.update_build_digest
   end
 end
 

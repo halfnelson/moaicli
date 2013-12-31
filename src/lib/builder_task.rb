@@ -13,7 +13,7 @@ class BuilderTask
     @options = options
     @project = project
     @host = host
-    @build_config = BuildConfig.new(app,project,host)
+    @build_config = BuildConfig.new(app,project,host,(options.release ? 'release': 'debug'))
     require host.build_file
     self.class.send :include, BuildFile
     if options.clean
@@ -65,5 +65,9 @@ class BuilderTask
     else
       status "Build", "Skipping cmake build. No config changes detected"
     end
- end
+  end
+
+  def update_build_digest
+    build_config.update_digest
+  end
 end

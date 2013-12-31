@@ -169,9 +169,14 @@ module BuildFile
       bail "Compile failed" unless res
     end
 
-
+    distribute
     status 'Complete', "Build operation complete", :green
 
+  end
+
+  def distribute
+    FileUtils.mkdir_p(out_dir)
+    FileUtils.cp apk_out, out_dir
   end
 
 
@@ -233,7 +238,14 @@ module BuildFile
 
   def build_dir
     File.join(build_config.build_dir,'src')
+  end
 
+  def out_dir
+    File.join(build_config.project.distribution_root,'android')
+  end
+
+  def apk_out
+    File.join(build_dir,'project','bin',build_config.project_name + (options.release ? '-release':'-debug')+'.apk' )
   end
 
   def template_exists?(src)

@@ -5,14 +5,15 @@ require 'lib/helper/moaisdk_helper'
 class BuildConfig
 
   include MoaiSdkHelper
-  attr_accessor :app,:host,:project, :config_file
+  attr_accessor :app,:host,:project, :config_file, :build_type
 
-  def initialize(app,project,host)
+  def initialize(app,project,host,build_type)
     @config = nil
     @sdk = nil
     @app = app
     @host = host
     @project = project
+    @build_type = build_type
     @config_file = File.join(project.config_path, host.config_file)
     @base_conf = File.join(File.dirname(@config_file),'config.yml')
     ensure_host_config
@@ -31,7 +32,7 @@ class BuildConfig
   end
 
   def build_dir
-    File.join(project.build_path,host.type,host.host_name)
+    File.join(project.build_path, host.host_name, "#{host.type}-#{build_type}")
   end
 
   def digest_file
@@ -70,7 +71,7 @@ class BuildConfig
 
   def digest
     require 'digest'
-    @digest ||= Digest::MD5.base64digest(config.to_yaml)
+    @digest ||= (Digest::MD5.base64digest(config.to_yaml))
   end
 
   def config
