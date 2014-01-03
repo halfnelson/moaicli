@@ -13,6 +13,7 @@ command :new do |c|
       return
     end
     directory app.project_template_path, project, { config: { app_name: name} }
+    Dir.chdir(project)
   end
 end
 

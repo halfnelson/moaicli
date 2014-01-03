@@ -28,6 +28,9 @@ command :build do |c|
     host = Host.find_host(host_name,host_paths)
     bail "Host #{host_name} was not found in among the installed hosts\nHosts:\n#{list_hosts(host_paths)}" unless host
 
+    #set platform
+    host.set_platform(options.platform)
+
     task = BuilderTask.new(app, project, host, options)
     status "Build", "Invoking host specific build task"
     task.build

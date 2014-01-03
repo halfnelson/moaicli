@@ -241,7 +241,7 @@ module BuildFile
   end
 
   def out_dir
-    File.join(build_config.project.distribution_root,'android')
+    build_config.distribution_root_for_host
   end
 
   def apk_out

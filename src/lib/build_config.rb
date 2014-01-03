@@ -20,7 +20,7 @@ class BuildConfig
   end
 
   def distribution_root_for_host
-    File.join(project.distribution_root, host.distribution_path)
+    File.join(project.distribution_root, host.host_name, "#{host.type}-#{build_type}")
   end
 
   def sdk

@@ -4,7 +4,7 @@ class Host
   attr_accessor :host_name
   attr_reader :path,:cmake_path,:build_file,:config_template_file,:config_file,:distribution_path,:has_project_config,:type
 
-  def initialize(name,path)
+  def initialize(name,path,platform=nil)
      @host_name= name
      @path = path
      @cmake_path =  File.join(path,'cmake')
@@ -13,7 +13,7 @@ class Host
      @config_file =   "#{host_name}_config.yml"
      @info_file = File.join(path,'host-info.yml')
 
-     @type = get_platform
+     @type = get_platform(platform)
   end
 
   def distribution_path
@@ -24,9 +24,16 @@ class Host
     info.platforms_.kind_of?(Array) ? info.platforms_ : []
   end
 
-  def get_platform(platform=nil)
+  def set_platform(platform)
+    @type = get_platform(platform)
+  end
+
+  def get_platform(platform)
     if platform
-       return supported_platforms.include?(platform) ? platform : FALSE
+       unless supported_platforms.include?(platform)
+         bail ("platform #{platform} is not supported for host #{host_name} valid values are #{supported_platforms}")
+       end
+       return platform
     end
     supported_platforms.first
   end

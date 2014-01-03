@@ -18,7 +18,7 @@ class AppConfig
 
 
   def config_src
-    File.join(MOAICLI_ROOT,'config','config.yml')
+    File.join(MOAICLI_ROOT,'config','app-config.yml')
   end
 
   def config_root

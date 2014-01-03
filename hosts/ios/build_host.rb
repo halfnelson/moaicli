@@ -16,8 +16,8 @@ module BuildFile
 
     #then we run
     app_name = 'moai'
-    status "Launching", "Simulator for #{build_config.build_dir}/Debug-iphonesimulator/#{app_name}.app/#{app_name}"
-    run_simulator("#{build_config.build_dir}/bin/Debug-iphonesimulator/#{app_name}.app/#{app_name}" )
+    status "Launching", "#{cmake_output_file}/#{app_name}"
+    run_simulator("#{cmake_output_file}/#{app_name}" )
   end
 
   def code_sign_param

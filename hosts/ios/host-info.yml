@@ -3,4 +3,4 @@ name: Moai Sdk iOS Host
 author: Zipline Games and Contributors
 platforms:
   - ios
-  
+  - ios_simulator

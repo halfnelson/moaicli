@@ -47,7 +47,7 @@ module BuildFile
   end
 
   def out_dir
-    File.join(build_config.project.distribution_root,'html')
+    build_config.project.distribution_root_for_host
   end
 
   def distribute
