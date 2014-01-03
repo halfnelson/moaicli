@@ -74,8 +74,15 @@ module MoaiSdkHelper
          return
       end
       status "Cloning", "Moai SDK  from #{git_src}"
-      GitHelper.clone(git_src,install_path)
-      
+      begin
+        temp_path = install_path + ".tmp"
+        FileUtils.rm_r temp_path if File.exists? temp_path
+        git =  GitHelper.clone(git_src,temp_path)
+        git.getRepository.close() #if we don't do this, jgit locks the folder and we can't rename
+        File.rename temp_path, install_path
+      ensure
+        FileUtils.rm_r temp_path if File.exists? temp_path #cleanup
+      end
     end
 
     def checkout
@@ -84,7 +91,16 @@ module MoaiSdkHelper
       begin
         result = repo.smart_checkout git_tag
       rescue Exception => e
-        bail e.message
+        status "Error", "Problem checking out #{git_tag}: #{e.message}", :red
+        if agree "Would you like to delete and re-clone the repository and try again? [y/n]"
+          @repo = nil #cleanup our old instance
+          GC.start #no nice way to clean up Repo instances, they hold onto the repository until finalize
+          status "Deleting", "Removing old clone"
+          FileUtils.rm_r install_path
+          clone
+          retry
+        end
+        bail "There was a problem with the configured cloned repository at #{install_path}. Could not checkout tag #{git_tag}:\n #{e.message}"
       end
       unless result[:success]
         bail "We could not checkout the specified sdk git reference #{git_tag}, there were conflicts with #{result[:result]}"

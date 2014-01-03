@@ -131,21 +131,18 @@
   class GitHelper
 
     def self.git
-      org.eclipse.jgit.api.Git;
+      org.eclipse.jgit.api.Git
     end
 
     def self.clone(git_src,install_path)
       FileUtils::mkdir_p install_path
       self.git.clone_repository
-      .setURI(git_src)
-      .set_directory(java.io.File.new(install_path))
-      .set_clone_all_branches(true)
-      .setCloneSubmodules(true)
-      .setProgressMonitor(CloneProgress.new())
-      .call()
-
-
-      
+        .setURI(git_src)
+        .set_directory(java.io.File.new(install_path))
+        .set_clone_all_branches(true)
+        .setCloneSubmodules(true)
+        .setProgressMonitor(CloneProgress.new())
+        .call()
     end
 
   end
