@@ -2,5 +2,5 @@ version: 1.0
 name: Moai Sdk OSX Glut Host
 author: Zipline Games and Contributors
 platforms:
-  - osx
+  - macosx
   

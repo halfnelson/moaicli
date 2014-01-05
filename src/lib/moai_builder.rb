@@ -353,7 +353,7 @@ module MoaiBuilder
            IOSBuilder.new(app,build_config,options)
         when :ios_simulator
           IOSSimulatorBuilder.new(app,build_config,options)
-        when :osx
+        when :macosx
            OSXBuilder.new(app,build_config,options)
         when :linux
            LinuxBuilder.new(app,build_config,options)
