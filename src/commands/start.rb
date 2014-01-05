@@ -18,6 +18,9 @@ command :start do |c|
     host_paths =   [project.hosts_root,app.hosts_root]
     host = Host.find_host(host_name,host_paths)
     bail "Host #{host_name} was not found in among the installed hosts\nHosts:\n#{HostsHelper.list_hosts(host_paths)}" unless host
+
+    host.set_platform(options.platform)
+
     task = BuilderTask.new(app, project, host, options)
     status "Build", "Invoking host specific start task"
     task.build

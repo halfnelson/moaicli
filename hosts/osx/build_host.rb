@@ -33,7 +33,7 @@ module BuildFile
   end
 
   def out_dir
-    build_config.project.distribution_root_for_host
+    build_config.distribution_root_for_host
   end
 
 end

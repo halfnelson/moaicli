@@ -37,13 +37,13 @@ add_library( freeglut_static STATIC ${FREEGLUT_SRC})
  add_executable ( moai
   ${CMAKE_CURRENT_SOURCE_DIR}/GlutHost.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/GlutHostMain.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/../host-modules/aku_modules.cpp
 )
 
 
 message ("opengl ${OPENGL_LIBRARIES}")
 target_link_libraries ( moai 
   moai-sim
-  moai-luaext
   moai-util
   moai-core
   zlcore
@@ -52,6 +52,10 @@ target_link_libraries ( moai
   ${OPENGL_LIBRARIES}
   third-party
 )
+
+if (MOAI_LUAEXT)
+   target_link_libraries ( moai moai-luaext)
+endif (MOAI_LUAEXT)
 
 if (MOAI_HTTP_CLIENT)
   target_link_libraries ( moai moai-http-client)

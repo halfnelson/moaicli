@@ -3,7 +3,11 @@ module BuildFile
   def start
   	Dir.chdir(out_dir) do
       status "Start", "Launching moai from #{out_dir}"
-      system("./moai main.lua")
+      if os == :windows
+        system("moai.exe main.lua")
+      else
+        system("./moai main.lua")
+      end
     end
   end
 
@@ -14,7 +18,11 @@ module BuildFile
   end
 
   def cmake_output
-    File.join(File.join(build_config.build_dir,'bin','libmoai','moai','host-glut', 'moai'))
+    if build_config.host.type == 'windows'
+      File.join(File.join(build_config.build_dir,'bin','libmoai','moai','host-glut', 'moai.exe'))
+    else
+      File.join(File.join(build_config.build_dir,'bin','libmoai','moai','host-glut', 'moai'))
+    end
   end
 
   def distribute
@@ -23,7 +31,7 @@ module BuildFile
   end
 
   def out_dir
-    build_config.project.distribution_root_for_host
+    build_config.distribution_root_for_host
   end
 
   def copy_project_files(destination)

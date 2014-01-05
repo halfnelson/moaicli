@@ -3,4 +3,6 @@ name: Moai Sdk Linux Glut Host
 author: Zipline Games and Contributors
 platforms:
   - linux
+  - windows
+  - osx
   

@@ -92,7 +92,7 @@ module MoaiSdkHelper
 
     def checkout
       return if repo.branch  =~ /#{git_tag}$/
-      status "Checkout", "Switching to ref #{git_tag}"
+      status "Checkout", "Switching from ref #{repo.branch} to ref #{git_tag}"
       begin
         result = repo.smart_checkout git_tag
       rescue Exception => e

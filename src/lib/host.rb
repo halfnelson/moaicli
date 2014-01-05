@@ -30,11 +30,16 @@ class Host
 
   def get_platform(platform)
     if platform
-       unless supported_platforms.include?(platform)
-         bail ("platform #{platform} is not supported for host #{host_name} valid values are #{supported_platforms}")
-       end
-       return platform
+      unless supported_platforms.include?(platform)
+        bail ("platform #{platform} is not supported for host #{host_name} valid values are #{supported_platforms}")
+      end
+      return platform
     end
+    if supported_platforms.include?(os.to_s)
+      status "Platform", "Selecting current os (#{os.to_s}) as default platform"
+      return os.to_s
+    end
+    status "Platform", "Selecting first available platform as current: #{supported_platforms.first}"
     supported_platforms.first
   end
 
