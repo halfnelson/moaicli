@@ -1,14 +1,7 @@
 require 'lib/builder_task'
 require 'lib/project'
 require 'lib/host'
-
-def list_hosts(host_paths)
-  results = []
-  Host.find_all(host_paths).each do |host|
-    results.push("#{host.host_name} - #{host.info.name_} (#{host.info.version_})")
-  end
-  results.join("\n")
-end
+require 'lib/helper/hosts_helper'
 
 command :start do |c|
   c.syntax = "#{PROGRAM} start <host_name>"
@@ -24,7 +17,7 @@ command :start do |c|
     project = Project.new
     host_paths =   [project.hosts_root,app.hosts_root]
     host = Host.find_host(host_name,host_paths)
-    bail "Host #{host_name} was not found in among the installed hosts\nHosts:\n#{list_hosts(host_paths)}" unless host
+    bail "Host #{host_name} was not found in among the installed hosts\nHosts:\n#{HostsHelper.list_hosts(host_paths)}" unless host
     task = BuilderTask.new(app, project, host, options)
     status "Build", "Invoking host specific start task"
     task.build
