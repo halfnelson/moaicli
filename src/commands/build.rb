@@ -34,7 +34,31 @@ command :build do |c|
 end
 
 
+command :env do |c|
+  c.syntax = "#{PROGRAM} env <host>"
+  c.description = "dumps to a shell for building host"
+  c.summary = "shell with env setup for building host"
+  c.option '--platform <platform>', String, 'Build the host for the specified supported platform'
+  c.action do |args,options|
+    host_name = args.first
+    bail "host_name is required" unless host_name
+    app = MoaiCLI.new
+    options.default  :platform => nil
 
+    project = Project.new
+    host_paths =   [project.hosts_root,app.hosts_root]
+    host = Host.find_host(host_name,host_paths)
+    bail "Host #{host_name} was not found in among the installed hosts\nHosts:\n#{HostsHelper.list_hosts(host_paths)}" unless host
+
+    #set platform
+    host.set_platform(options.platform)
+
+    task = BuilderTask.new(app, project, host, options)
+    status "Shell", "Invoking platform build shell"
+    task.build_env
+
+  end
+end
 
 
 

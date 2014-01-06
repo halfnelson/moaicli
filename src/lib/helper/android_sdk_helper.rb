@@ -305,6 +305,7 @@ module AndroidSdkHelper
     end
     status "Config", "Using NDK From #{sdk.location}"
     ENV['ANDROID_NDK']=sdk.ndk_location
+    app.platform.add_to_path(sdk.ndk_location)
     sdk
   end
 

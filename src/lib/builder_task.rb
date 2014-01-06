@@ -32,6 +32,15 @@ class BuilderTask
     file_content(src,build_config)
   end
 
+  def build_env
+    builder = get_builder(app,build_config,options)
+    status "ENV", "setup env"
+    if system('c:\windows\system32\cmd.exe')
+      status "ENV", "env was ok"
+    end
+    status "ENV", "env closed"
+  end
+
 
   def build_cmake(target,params)
     builder = get_builder(app,build_config,options)

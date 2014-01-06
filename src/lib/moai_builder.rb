@@ -187,11 +187,16 @@ module MoaiBuilder
   end
 
   class AndroidBuilder < BaseBuilder
+    require 'lib/helper/android_helper'
     require 'lib/helper/android_sdk_helper'
     include AndroidSdkHelper
+    include AndroidHelper
 
     def initialize(app,build_config,options)
       super(app,build_config,options)
+      config_ant
+      config_jdk
+      sdk = config_android_sdk(10)
       @ndk = config_android_ndk
     end
 
