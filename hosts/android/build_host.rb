@@ -3,9 +3,9 @@ require 'lib/helper/moaisdk_helper'
 
 module BuildFile
 
-  include AndroidHelper
-  include MoaiSdkHelper
 
+  include MoaiSdkHelper
+  include AndroidHelper
   def start
     sdk = config_android_sdk(10)
     sdk.ensure_device

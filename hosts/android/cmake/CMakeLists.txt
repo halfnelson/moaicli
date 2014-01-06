@@ -31,7 +31,10 @@ include_directories (
 )
 
 
-add_library ( moai SHARED ${SDK_DIR}/ant/libmoai/jni/src/moai.cpp )
+add_library ( moai SHARED
+    ${SDK_DIR}/ant/libmoai/jni/src/moai.cpp
+    ${SDK_DIR}/src/host-modules/aku_modules.cpp
+ )
 
 
 target_link_libraries ( moai

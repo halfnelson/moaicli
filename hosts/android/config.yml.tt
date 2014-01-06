@@ -43,6 +43,7 @@ extensions:
      twitter: yes
      tstorewall: no
      tstoregamecenter: no
+     playservices: no
 
 icon:
     ldpi:
