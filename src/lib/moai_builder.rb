@@ -49,7 +49,7 @@ module MoaiBuilder
 
     def create_cmake_build(cmake_params)
       #skip this if it has been already done.
-      return if cmake_cache_exists? && !options.force # && !config.config_has_changed?
+      return if cmake_cache_exists? && !config.config_has_changed?
 
       params = cmake_params ? cmake_params.dup: []
       #our three required params
