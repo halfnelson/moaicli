@@ -3,6 +3,7 @@ project ( moaiios )
 
 if (${IOS_PLATFORM} STREQUAL "SIMULATOR")
 set(CMAKE_XCODE_EFFECTIVE_PLATFORMS "-iphonesimulator")
+set (CMAKE_OSX_ARCHITECTURES "i386" CACHE string  "Build architecture for iOS" )
 else (${IOS_PLATFORM} STREQUAL "SIMULATOR")
 set(CMAKE_XCODE_EFFECTIVE_PLATFORMS "-iphoneos")
 set (CMAKE_OSX_ARCHITECTURES "armv7" CACHE string  "Build architecture for iOS" )
