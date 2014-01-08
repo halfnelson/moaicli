@@ -2,9 +2,13 @@ cmake_minimum_required ( VERSION 2.8.8 )
 project ( moaiios )
 
 if (${IOS_PLATFORM} STREQUAL "SIMULATOR")
+
 set(CMAKE_XCODE_EFFECTIVE_PLATFORMS "-iphonesimulator")
 set (CMAKE_OSX_ARCHITECTURES "i386" CACHE string  "Build architecture for iOS" )
+set (CMAKE_OSX_ARCHITECTURES "i386")
+message("CMAKE_OSX_ARCHITECTURES = ${CMAKE_OSX_ARCHITECTURES}")
 else (${IOS_PLATFORM} STREQUAL "SIMULATOR")
+
 set(CMAKE_XCODE_EFFECTIVE_PLATFORMS "-iphoneos")
 set (CMAKE_OSX_ARCHITECTURES "armv7" CACHE string  "Build architecture for iOS" )
 
