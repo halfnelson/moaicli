@@ -33,6 +33,7 @@ class Host
       unless supported_platforms.include?(platform)
         bail ("platform #{platform} is not supported for host #{host_name} valid values are #{supported_platforms}")
       end
+      status "Platform", "switching to requested platform #{platform}"
       return platform
     end
     if supported_platforms.include?(os.to_s)
