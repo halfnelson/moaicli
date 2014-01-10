@@ -1,8 +1,0 @@
-version: 1.0
-name: Moai Sdk Linux Glut Host
-author: Zipline Games and Contributors
-platforms:
-  - linux
-  - windows
-  - macosx
-  
