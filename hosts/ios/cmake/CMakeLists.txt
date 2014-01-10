@@ -54,6 +54,7 @@ set ( MOAIIOS_SOURCES
      ${IOS_HOST}/Classes/MoaiAppDelegate.mm
      ${IOS_HOST}/Classes/LocationObserver.mm
      ${SDK_DIR}/src/host-glut/ParticlePresets.cpp
+     ${SDK_DIR}/src/host-modules/aku_modules.cpp
 )
 
 set ( MOAIIOS_RESOURCES
@@ -135,14 +136,18 @@ set( FWORKS
                   CoreGraphics
                   CoreLocation
                   CoreTelephony
+                  CoreMotion
                   CFNetwork
                   Foundation
                   GameKit
+                  EventKit
                   MediaPlayer
+		  MobileCoreServices
                   MessageUI
                   OpenGLES
                   QuartzCore
                   StoreKit
+                  Social
                   SystemConfiguration
                   Twitter
                   UIKit)

@@ -2,6 +2,7 @@ code_sign_identity: "iPhone Developer"
 
 app_id: "com.getmoai.samples"
 
+info_plist:
 
 
 
@@ -15,4 +16,5 @@ extensions:
      twitter: yes
      vungle: no
      playhaven: yes
+     mobileapptracker: yes
 
