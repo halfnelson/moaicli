@@ -35,10 +35,13 @@ class BuilderTask
   def build_env
     builder = get_builder(app,build_config,options)
     status "ENV", "setup env"
-    if system('c:\windows\system32\cmd.exe')
-      status "ENV", "env was ok"
+    status "ENV", "Launching shell with dev environment"
+    if os == :windows
+       cmd = ENV['ComSpec']
+    else
+       cmd = 'bash'
     end
-    status "ENV", "env closed"
+    exec(cmd)
   end
 
 
