@@ -35,13 +35,20 @@ class BuilderTask
   def build_env
     builder = get_builder(app,build_config,options)
     status "ENV", "setup env"
+    require 'childprocess.rb'
+
     status "ENV", "Launching shell with dev environment"
     if os == :windows
-       cmd = ENV['ComSpec']
+      cmd = ENV['ComSpec']
     else
-       cmd = 'bash'
+      cmd = 'bash'
     end
-    exec(cmd)
+    process = ChildProcess.build(cmd)
+
+# start the process
+    process.start
+    process.wait
+    status "ENV","Back at your old boring useless shell"
   end
 
 

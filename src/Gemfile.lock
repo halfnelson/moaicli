@@ -19,6 +19,14 @@ GIT
     rjgit (0.1.0)
       mime-types (~> 1.15)
 
+GIT
+  remote: git://github.com/jarib/childprocess.git
+  revision: de74f3dc3b8fa2a6c250e1ebcaf4536d85b77894
+  branch: v0.3.9
+  specs:
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -26,6 +34,8 @@ GEM
       highline (~> 1.6.11)
     config_spartan (1.0.1)
       hashie
+    ffi (1.9.3-java)
+    ffi (1.9.3-x86-mingw32)
     hashie (2.0.5)
     mime-types (1.23)
     ruby-progressbar (1.1.1)
@@ -37,6 +47,7 @@ PLATFORMS
 
 DEPENDENCIES
   ansicolor!
+  childprocess!
   commander
   config_spartan
   highline!
