@@ -1,4 +1,6 @@
 module HostsHelper
+  require "rjgit"
+    include RJGit
   def self.list_hosts(host_paths)
     results = []
     results.push("")
