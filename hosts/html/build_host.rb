@@ -59,6 +59,7 @@ module BuildFile
     #copy moaijs.js
     FileUtils.cp cmake_output, File.join(out_dir,'www','moaijs.js')
     #build the rom from the lua files
+    status "Distribute", "Building application rom"
     build_rom
   end
 
