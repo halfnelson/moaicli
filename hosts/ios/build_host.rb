@@ -46,12 +46,12 @@ module BuildFile
 
 
   def build
-    status "Build","Building for #{(build_config.host.type == :ios_simulator) ? "Simulator":"Device"}"
-    build_moai('all',build_config.modules, cmake_output_file, build_params )
+    status "Build","Building for #{(build_config.host.type == 'ios_simulator') ? "Simulator":"Device"}"
+    build_moai('moai',build_config.modules, cmake_output_file, build_params )
   end
 
   def simulator?
-    build_config.host.type == :ios_simulator
+    build_config.host.type == 'ios_simulator'
   end
 
 

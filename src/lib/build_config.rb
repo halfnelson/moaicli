@@ -28,7 +28,7 @@ class BuildConfig
   end
 
   def sdk_version
-    { repository: config.sdk_.repository, ref: config.sdk_.ref }
+    { repository: config.sdk_.repository, ref: config.sdk_.ref, folder: config.sdk_.folder }
   end
 
   def build_dir

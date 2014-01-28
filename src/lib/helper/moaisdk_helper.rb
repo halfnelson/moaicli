@@ -20,12 +20,17 @@ module MoaiSdkHelper
     end
 
     def git_src
-      @config[:repository] || "https://github.com/moai/moai-dev.git"
+      @config[:repository]
     end
 
     def git_tag
-      @config[:ref] || 'Version-1.4p0'
+      @config[:ref]
     end
+
+    def sdk_folder
+      @config[:folder]
+    end
+
 
     def id_from_path
       uri = URI(git_src)
@@ -33,7 +38,7 @@ module MoaiSdkHelper
     end
 
     def install_path
-      File.join(@sdk_root,id_from_path)
+      sdk_folder || File.join(@sdk_root,id_from_path)
     end
 
     def sdk_path
@@ -87,7 +92,7 @@ module MoaiSdkHelper
 
     def checkout
       return if repo.branch  =~ /#{git_tag}$/
-      status "Checkout", "Switching to ref #{git_tag}"
+      status "Checkout", "Switching from ref #{repo.branch} to ref #{git_tag}"
       begin
         result = repo.smart_checkout git_tag
       rescue Exception => e
@@ -108,8 +113,17 @@ module MoaiSdkHelper
     end
 
     def install!
-      clone
-      checkout
+      unless installed?
+        unless git_src
+          if sdk_folder
+            bail "New folder specified ''#{sdk_folder}' but no git repository to clone from. "
+          else
+            bail "No git repository or folder specified in project config"
+          end
+        end
+        clone
+      end
+      checkout if git_tag
     end
 
     def update

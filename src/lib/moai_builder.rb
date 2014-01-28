@@ -49,7 +49,7 @@ module MoaiBuilder
 
     def create_cmake_build(cmake_params)
       #skip this if it has been already done.
-      return if cmake_cache_exists?
+      return if cmake_cache_exists? && !config.config_has_changed?
 
       params = cmake_params ? cmake_params.dup: []
       #our three required params
@@ -187,11 +187,16 @@ module MoaiBuilder
   end
 
   class AndroidBuilder < BaseBuilder
+    require 'lib/helper/android_helper'
     require 'lib/helper/android_sdk_helper'
     include AndroidSdkHelper
+    include AndroidHelper
 
     def initialize(app,build_config,options)
       super(app,build_config,options)
+      config_ant
+      config_jdk
+      sdk = config_android_sdk(10)
       @ndk = config_android_ndk
     end
 
@@ -353,7 +358,7 @@ module MoaiBuilder
            IOSBuilder.new(app,build_config,options)
         when :ios_simulator
           IOSSimulatorBuilder.new(app,build_config,options)
-        when :osx
+        when :macosx
            OSXBuilder.new(app,build_config,options)
         when :linux
            LinuxBuilder.new(app,build_config,options)

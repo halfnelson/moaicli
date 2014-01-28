@@ -47,7 +47,7 @@ module BuildFile
   end
 
   def out_dir
-    build_config.project.distribution_root_for_host
+    build_config.distribution_root_for_host
   end
 
   def distribute
@@ -59,6 +59,7 @@ module BuildFile
     #copy moaijs.js
     FileUtils.cp cmake_output, File.join(out_dir,'www','moaijs.js')
     #build the rom from the lua files
+    status "Distribute", "Building application rom"
     build_rom
   end
 
