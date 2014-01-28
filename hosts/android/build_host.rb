@@ -134,7 +134,7 @@ module BuildFile
                    :display_relative=> source_file('project')
 
     copy_directory source_file('project','src','app'), dest('project',package_path)
-    mkdir_p dest('project','src','com','ziplinegames','moai')
+    FileUtils.mkdir_p dest('project','src','com','ziplinegames','moai')
     Dir.glob(File.join(source_file('project','src','moai'),'*')).select {|f| !File.directory? f }.each  do |f|
       copy_file f, dest('project','src','com','ziplinegames','moai', File.basename(f))
     end
