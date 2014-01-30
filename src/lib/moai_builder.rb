@@ -189,6 +189,8 @@ module MoaiBuilder
   class AndroidBuilder < BaseBuilder
     require 'lib/helper/android_helper'
     require 'lib/helper/android_sdk_helper'
+    require 'lib/helper/mingw_helper'
+    include MingwHelper
     include AndroidSdkHelper
     include AndroidHelper
 
@@ -198,6 +200,9 @@ module MoaiBuilder
       config_jdk
       sdk = config_android_sdk(10)
       @ndk = config_android_ndk
+      if app.platform.type == :windows && build_config.modules['LUAJIT']
+        mingw = config_mingw
+      end
     end
 
     def cmake_platform_define
