@@ -55,12 +55,10 @@ module MoaiBuilder
       #our three required params
       params.push(cmake_platform_params)
       params.push("-DCMAKE_BUILD_TYPE=#{build_type}")
-      params.push("-DPLUGIN_DIR='#{config.project.plugin_path}'")
-      params.push("-DLIBMOAI_DIR='#{lib_build_dir}'")
-      params.push("-DBUILD_DIR='#{build_dir}'")
-      params.push("-DSDK_DIR='#{sdk.sdk_path}'")
-      params.push("-DSRC_DIR='#{config.project.src_path}'")
-      params << config.host.cmake_path
+    #  params.push("-DPLUGIN_DIR='#{config.project.plugin_path}'")
+      params.push("-DCUSTOM_HOST='#{config.host.cmake_path}'") if config.host.has_cmake_file?
+
+      params << File.join(sdk.sdk_path,'cmake')
 
       FileUtils.chdir(cmake_build_dir) do
         status "Configuring", "Configuring Build Environment"

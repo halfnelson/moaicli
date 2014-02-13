@@ -13,15 +13,15 @@ module BuildFile
 
   def build
 	  status "Build", "building host to #{project.relative_path(build_config.build_dir)}"
-    build_moai('moai',build_config.modules,cmake_output)
+    build_moai('moai',build_config.modules,cmake_output,%w(-DSDL_HOST=TRUE))
     distribute
   end
 
   def cmake_output
     if build_config.host.type == 'windows'
-      File.join(File.join(build_config.build_dir,'bin','libmoai','moai','host-sdl', 'moai.exe'))
+      File.join(File.join(build_config.build_dir,'bin','host-sdl', 'moai.exe'))
     else
-      File.join(File.join(build_config.build_dir,'bin','libmoai','moai','host-sdl', 'moai'))
+      File.join(File.join(build_config.build_dir,'bin','host-sdl', 'moai'))
     end
   end
 

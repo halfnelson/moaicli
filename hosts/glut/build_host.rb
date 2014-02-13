@@ -19,9 +19,9 @@ module BuildFile
 
   def cmake_output
     if build_config.host.type == 'windows'
-      File.join(File.join(build_config.build_dir,'bin','libmoai','moai','host-glut', 'moai.exe'))
+      File.join(File.join(build_config.build_dir,'bin','host-glut', 'moai.exe'))
     else
-      File.join(File.join(build_config.build_dir,'bin','libmoai','moai','host-glut', 'moai'))
+      File.join(File.join(build_config.build_dir,'bin','host-glut', 'moai'))
     end
   end
 

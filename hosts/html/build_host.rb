@@ -43,7 +43,7 @@ module BuildFile
   end
 
   def template_dir
-    File.join(build_config.build_dir,'bin','libmoai','moai','host-html', 'host-template')
+    File.join(build_config.build_dir,'bin','host-html', 'host-template')
   end
 
   def out_dir

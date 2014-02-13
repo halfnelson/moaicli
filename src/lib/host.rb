@@ -48,7 +48,13 @@ class Host
     File.exists?(config_template_file)
   end
 
+  def cmake_file
+    File.join(cmake_path,'CMakeLists.txt')
+  end
 
+  def has_cmake_file?
+    File.exists? cmake_file
+  end
 
   def info
     bail "host '#{host_name}' at #{path} does not have a host-info.yml file" unless File.exists? @info_file
