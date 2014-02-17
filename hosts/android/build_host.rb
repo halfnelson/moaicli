@@ -233,7 +233,7 @@ module BuildFile
   end
 
   def cmake_build_dir
-    File.join(build_config.build_dir,'bin','host-android')
+    File.join(build_config.build_dir,'bin')
   end
 
   def build_dir
