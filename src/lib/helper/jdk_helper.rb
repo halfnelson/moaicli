@@ -103,7 +103,7 @@ class WindowsJDK < JDK
   end
 
   def launch_installer
-    run("#{download_destination} /s ADDLOCAL=\"ToolsFeature,SourceFeature\"")
+    system("#{download_destination} /s ADDLOCAL=\"ToolsFeature,SourceFeature\"")
   end
 
   private
