@@ -58,17 +58,29 @@ class BuilderTask
   end
 
 
-  def do_build_moai(target,modules, params=[])
+  def do_build_moai(target, params=[])
     full_params = params.dup
+
+    modules = build_config.modules || []
+
+
     modules.each do |mod, enabled|
       if enabled
         full_params << "-DMOAI_#{mod.upcase}=1"
       end
     end
+
+    plugins = build_config.plugins || []
+    plugins.each do |plugin, enabled|
+      if enabled
+        full_params << "-DPLUGIN_#{plugin.upcase}=1"
+      end
+    end
+
     build_cmake(target,full_params)
   end
 
-  def build_moai(target,modules,output,params=[])
+  def build_moai(target,output,params=[])
     if options.force || !File.exists?(output) || build_config.config_has_changed?
       if options.force
         status "Build","Forced rebuild of LibMoai"
@@ -80,7 +92,9 @@ class BuilderTask
       unless File.exists?(output)
         status "Build","#{File.basename(output)} not found. Rebuilding"
       end
-      do_build_moai(target,modules,params)
+
+
+      do_build_moai(target,params)
     else
       status "Build", "Skipping cmake build. No config changes detected"
     end

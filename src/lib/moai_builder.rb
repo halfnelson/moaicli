@@ -55,7 +55,11 @@ module MoaiBuilder
       #our three required params
       params.push(cmake_platform_params)
       params.push("-DCMAKE_BUILD_TYPE=#{build_type}")
-    #  params.push("-DPLUGIN_DIR='#{config.project.plugin_path}'")
+
+      if Dir.entries(config.project.plugin_path).reject { |d| d == "." || d == ".."}.any?
+        params.push("-DPLUGIN_DIR='#{config.project.plugin_path}'")
+      end
+
       params.push("-DCUSTOM_HOST='#{config.host.cmake_path}'") if config.host.has_cmake_file?
 
       params << File.join(sdk.sdk_path,'cmake')
@@ -81,7 +85,7 @@ module MoaiBuilder
 
     def create_cmake_root
       #copy our libmoai and plugin cmake file
-      directory app.libmoai_template_path, lib_build_dir, cmake_context #todo avoid modifications if not changed
+    # directory app.libmoai_template_path, lib_build_dir, cmake_context #todo avoid modifications if not changed
     end
 
     def cmake_build_dir

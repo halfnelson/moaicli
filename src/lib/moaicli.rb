@@ -49,13 +49,12 @@ class MoaiCLI
 
     #we should blow away the path on windows since existence of sh.exe breaks cmake
     if platform.type == :windows
-      ENV['PATH'] = ""
+      ENV['PATH'] = File.join(ENV['windir'],'system32') #keep system32 around for xcopy
     end
     @sdk_root = File.join(@platform.support_path,"sdks")
     @cache_path = File.join(@platform.support_path,"cache")
     @deps_root =  File.join(@platform.support_path,'deps')
     install
-
     @config =  AppConfig.new(@platform.support_path)
   end
 

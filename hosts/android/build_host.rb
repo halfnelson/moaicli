@@ -36,7 +36,7 @@ module BuildFile
     config_jdk
     sdk = config_android_sdk(10)
     config_android_ndk
-    build_moai('moai',build_config.modules,cmake_output,[disabled_extensions_param])
+    build_moai('moai',cmake_output,[disabled_extensions_param])
 
 
     build_config[:android_sdk_root] = sdk.sdk_path

@@ -13,7 +13,7 @@ module BuildFile
 
   def build
 	  status "Build", "building host to #{project.relative_path(build_config.build_dir)}"
-    build_moai('moai',build_config.modules,cmake_output,%w(-DSDL_HOST=TRUE))
+    build_moai('moai',cmake_output,%w(-DSDL_HOST=TRUE))
     distribute
   end
 

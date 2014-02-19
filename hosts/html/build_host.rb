@@ -34,7 +34,7 @@ module BuildFile
       status 'Warning', "Module [#{mod}] is not supported, trying to compile anyway", :magenta if modules[mod]
     end
 
-    build_moai('host-html-template',build_config.modules,cmake_output,[])
+    build_moai('host-html-template',cmake_output,[])
     distribute
   end
 
