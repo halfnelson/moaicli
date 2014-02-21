@@ -278,7 +278,7 @@ module MoaiBuilder
     end
 
     def simulator?
-      build_config.host.type == 'ios_simulator'
+      config.host.type == 'ios_simulator'
     end
     
 
