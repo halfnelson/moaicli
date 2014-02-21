@@ -56,7 +56,8 @@ module MoaiBuilder
       params.push(cmake_platform_params)
       params.push("-DCMAKE_BUILD_TYPE=#{build_type}")
 
-      if Dir.entries(config.project.plugin_path).reject { |d| d == "." || d == ".."}.any?
+
+      if Dir.exists?(config.project.plugin_path) and Dir.entries(config.project.plugin_path).reject { |d| d == "." || d == ".."}.any?
         params.push("-DPLUGIN_DIR='#{config.project.plugin_path}'")
       end
 
