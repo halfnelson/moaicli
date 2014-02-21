@@ -256,13 +256,36 @@ module MoaiBuilder
     end
 
 
+    def cmake_extra_build_params
+      "#{sdk_param} #{arch_param}"
+    end
+
+    def arch_param
+      if simulator?
+        "-arch i386"
+      else
+        "-arch armv7"
+      end
+    end
+
+    def sdk_param
+      if simulator?
+        "-sdk iphonesimulator"
+      else
+        "-sdk iphoneos"
+      end
+    end
+
+    def simulator?
+      build_config.host.type == 'ios_simulator'
+    end
     
 
     def create_cmake_root
       super
       #create a CMakeLists.txt with our src folder contents inside
       src = config.project.src_path
-      files = Dir.glob(File.join(src,'**','*'))
+      files = Dir.glob(File.join(src,'*'))
       cmake_content = %Q[
           cmake_minimum_required ( VERSION 2.8.5 )
           project ( moai-project-res )
@@ -291,31 +314,12 @@ module MoaiBuilder
     end
 
     def cmake_platform_params
-      "-G \"#{cmake_makefile_type}\" -D#{cmake_platform_define}=true -DIOS_PLATFORM=#{cmake_ios_platform} -DCMAKE_TOOLCHAIN_FILE='#{cmake_toolchain_file}' -DCMAKE_IOS_DEVELOPER_ROOT=\"#{sdk_platform_path}\""
-    end
-  end
-
-
-  class IOSSimulatorBuilder < IOSBuilder
-
-    def initialize(app,build_config,options)
-      super(app,build_config,options)
-      bail "Building for IOS requires macosx" unless app.platform.type == :macosx
-    end
-
-    def cmake_ios_platform
-      'SIMULATOR'
-    end
-
-    def sdk_platform_path
-      iphone_simulator_platform_path
+      "-G \"#{cmake_makefile_type}\" -D#{cmake_platform_define}=true"
     end
   end
 
   class HtmlBuilder < BaseBuilder
     require 'lib/helper/emscripten_helper'
-
-
     require 'lib/helper/mingw_helper'
     include MingwHelper
 
@@ -364,7 +368,7 @@ module MoaiBuilder
         when :ios
            IOSBuilder.new(app,build_config,options)
         when :ios_simulator
-          IOSSimulatorBuilder.new(app,build_config,options)
+          IOSBuilder.new(app,build_config,options)
         when :macosx
            OSXBuilder.new(app,build_config,options)
         when :linux

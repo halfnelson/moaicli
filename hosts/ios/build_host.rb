@@ -24,23 +24,16 @@ module BuildFile
     "-DSIGN_IDENTITY='#{build_config.code_sign_identity}'"
   end
 
-  def arch_param
-    if simulator?
-      "-DCMAKE_OSX_ARCHITECTURES=i386"
-    else
-      "-DCMAKE_OSX_ARCHITECTURES=armv7"
-    end
-  end
+
+
 
   def build_params
     [
       disabled_extensions_param,
       code_sign_param,
-      arch_param,
       "-DAPP_NAME='#{build_config.name}'",
       "-DAPP_ID='#{build_config.app_id}'",
       "-DAPP_VERSION='#{build_config.version_name}'"
-
     ]
   end
 
@@ -50,9 +43,6 @@ module BuildFile
     build_moai('moai', cmake_output_file, build_params )
   end
 
-  def simulator?
-    build_config.host.type == 'ios_simulator'
-  end
 
 
   def cmake_output_file
