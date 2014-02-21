@@ -296,7 +296,7 @@ module MoaiBuilder
              PARENT_SCOPE
           )
       ]
-      res_dir = File.join(build_dir,'resources')
+      res_dir = File.join(build_dir,'bin','bundle_res')
       FileUtils.mkdir_p(res_dir)
       IO.write(File.join(res_dir,'CMakeLists.txt'),cmake_content)
     end
