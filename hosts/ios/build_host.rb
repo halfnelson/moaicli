@@ -43,7 +43,9 @@ module BuildFile
     build_moai('moai', cmake_output_file, build_params )
   end
 
-
+  def simulator?
+    build_config.host.type == 'ios_simulator'
+  end
 
   def cmake_output_file
     app_name = 'moai'
