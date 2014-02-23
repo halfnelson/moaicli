@@ -27,6 +27,7 @@ modules:
   SFMT: true
   VORBIS: true
   UNTZ: true
+  LUAJIT: true
 
 extensions:
      miscellaneous: yes

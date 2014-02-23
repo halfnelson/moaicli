@@ -58,7 +58,7 @@ module MingwHelper
   end
 
 
-  def config_mingw
+  def self.config_mingw(app)
 
     download_cache = app.cache_path
     install_to = app.deps_root

@@ -24,13 +24,6 @@ class BuilderTask
 
 
 
-  def directory_with_config(src,dest)
-    directory(src,dest,build_config)
-  end
-
-  def file_content_with_config(src)
-    file_content(src,build_config)
-  end
 
   def build_env
     builder = get_builder(app,build_config,options)
@@ -58,47 +51,6 @@ class BuilderTask
   end
 
 
-  def do_build_moai(target, params=[])
-    full_params = params.dup
-
-    modules = build_config.modules || []
-
-
-    modules.each do |mod, enabled|
-      if enabled
-        full_params << "-DMOAI_#{mod.upcase}=1"
-      end
-    end
-
-    plugins = build_config.plugins || []
-    plugins.each do |plugin, enabled|
-      if enabled
-        full_params << "-DPLUGIN_#{plugin.upcase}=1"
-      end
-    end
-
-    build_cmake(target,full_params)
-  end
-
-  def build_moai(target,output,params=[])
-    if options.force || !File.exists?(output) || build_config.config_has_changed?
-      if options.force
-        status "Build","Forced rebuild of LibMoai"
-      end
-      if build_config.config_has_changed?
-        status "Build","Config has changed. Rebuilding"
-      end
-
-      unless File.exists?(output)
-        status "Build","#{File.basename(output)} not found. Rebuilding"
-      end
-
-
-      do_build_moai(target,params)
-    else
-      status "Build", "Skipping cmake build. No config changes detected"
-    end
-  end
 
   def update_build_digest
     build_config.update_digest

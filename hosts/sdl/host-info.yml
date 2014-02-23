@@ -5,4 +5,5 @@ platforms:
   - linux
   - windows
   - macosx
-  
+output_directory: host-sdl
+cmake_params: -DSDL_HOST=TRUE

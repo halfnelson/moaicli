@@ -56,8 +56,28 @@ class Host
     File.exists? cmake_file
   end
 
+  def has_info?
+    File.exists? @info_file
+  end
+
+  def output_name
+    has_info? and info.output_name
+  end
+
+  def output_directory
+    has_info? and info.output_directory
+  end
+
+  def target
+    has_info? and info.target
+  end
+
+  def cmake_params
+    has_info? and (info.cmake_params.kind_of?(Array) ? info.cmake_params : [ info.cmake_params ])
+  end
+
   def info
-    bail "host '#{host_name}' at #{path} does not have a host-info.yml file" unless File.exists? @info_file
+    bail "host '#{host_name}' at #{path} does not have a host-info.yml file" unless has_info?
     info_file = @info_file
     @info ||= ConfigSpartan.create do
       file info_file

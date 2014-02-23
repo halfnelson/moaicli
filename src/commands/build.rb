@@ -1,5 +1,6 @@
-require 'lib/builder_task'
+#require 'lib/builder_task'
 require 'lib/helper/hosts_helper'
+require 'lib/moai_builder'
 
 
 
@@ -26,10 +27,19 @@ command :build do |c|
     #set platform
     host.set_platform(options.platform)
 
-    task = BuilderTask.new(app, project, host, options)
+    #create build config
+    build_config = BuildConfig.new(app,project,host,(options.release ? 'release': 'debug'))
+
+    #clean if needed
+    if options.clean
+      status "Clean", "Removing old build files"
+      FileUtils.rm_rf(build_config.build_dir)
+    end
+
+    #build
+    builder = MoaiBuilder.get_builder(app,build_config,options)
     status "Build", "Invoking host specific build task"
-    task.build
-    task.update_build_digest
+    builder.build
   end
 end
 
