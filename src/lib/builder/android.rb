@@ -138,7 +138,7 @@ class AndroidBuilder < BaseBuilder
 
     copy_file  source_file('project','local.properties'), dest('project','local.properties')
     Dir.glob(dest('**','local.properties')).each do |file|
-      simple_template file, file, '@SDK_ROOT@'=> config[:android_sdk_root]
+      simple_template file, file, '@SDK_ROOT@'=> @android_sdk.sdk_path
     end
 
 
@@ -173,12 +173,12 @@ class AndroidBuilder < BaseBuilder
     #assets
     copy_file source_file('init.lua'), File.join(assets,'init.lua')
 
-    copy_directory File.join(project.src_path,config.src_dir)  , File.join(assets, config.working_dir),
-                   exclude_dir: %w(\..*), exclude: %w('.*\.sh','.*\.bat'),display_relative: project.src_path
+    copy_directory File.join(config.project.src_path,config.src_dir)  , File.join(assets, config.working_dir),
+                   exclude_dir: %w(\..*), exclude: %w('.*\.sh','.*\.bat'),display_relative: config.project.src_path
 
 
     config.asset_dirs.each do |asset_dir|
-      copy_directory File.join(project.src_path,asset_dir), File.join(assets,asset_dir)
+      copy_directory File.join(config.project.src_path,asset_dir), File.join(assets,asset_dir)
     end
 
     release_type = options.release ? 'release':'debug'
