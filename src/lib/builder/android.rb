@@ -17,6 +17,19 @@ class AndroidBuilder < BaseBuilder
     end
   end
 
+  def start
+
+    @android_sdk.ensure_device
+    #do we have somewhere to run it
+    Dir.chdir(File.join(build_dir,'project')) do
+      system('ant uninstall')
+      system('ant installd')
+      system("adb shell am start -a android.intent.action.MAIN -n #{config.package}/#{config.package}.MoaiActivity")
+      system('adb logcat -c')
+      system('adb logcat MoaiLog:V AndroidRuntime:E *:S')
+    end
+  end
+
   def cmake_platform_define
     'BUILD_ANDROID'
   end
@@ -241,7 +254,7 @@ class AndroidBuilder < BaseBuilder
   end
 
   def host_source
-    File.join(config.sdk.sdk_path,'ant', 'host-source')
+    config.host.android_source || File.join(config.sdk.sdk_path,'ant', 'host-source')
   end
 
   def source_file(*sub_paths)

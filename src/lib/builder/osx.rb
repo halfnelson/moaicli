@@ -1,4 +1,4 @@
-class OSXBuilder < BaseBuilder
+class OSXBuilder < DesktopBuilder
   def initialize(app,build_config,options)
     super(app,build_config,options)
     bail "Building for OSX requires MacOSX" unless app.platform.type == :macosx

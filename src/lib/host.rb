@@ -76,6 +76,10 @@ class Host
     has_info? and (info.cmake_params.kind_of?(Array) ? info.cmake_params : [ info.cmake_params ])
   end
 
+  def android_source
+    has_info? and info.android_source
+  end
+
   def info
     bail "host '#{host_name}' at #{path} does not have a host-info.yml file" unless has_info?
     info_file = @info_file

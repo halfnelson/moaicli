@@ -1,4 +1,4 @@
-class LinuxBuilder < BaseBuilder
+class LinuxBuilder < DesktopBuilder
   def initialize(app,build_config,options)
     super(app,build_config,options)
     bail "Building for Linux requires linux" unless app.platform.type == :linux
