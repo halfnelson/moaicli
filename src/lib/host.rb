@@ -80,6 +80,10 @@ class Host
     has_info? and info.android_source
   end
 
+  def html_template
+    has_info? and info.html_template
+  end
+
   def info
     bail "host '#{host_name}' at #{path} does not have a host-info.yml file" unless has_info?
     info_file = @info_file

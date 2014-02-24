@@ -3,4 +3,6 @@ name: Moai Sdk Html/JS Host
 author: Zipline Games and Contributors
 platforms:
   - html
+output_directory: host-html
+target: host-html-template
   
