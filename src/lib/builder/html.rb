@@ -90,12 +90,16 @@ class HtmlBuilder < BaseBuilder
     build_rom
   end
 
+  def packager
+    File.join(config.sdk.sdk_path,'src','host-html','host-template', 'file_packager.py')
+  end
+
   def build_rom
     require 'lib/helper/emscripten_helper'
     rom_dest = File.join(out_dir,'www','moaiapp.rom')
     js_dest = File.join(out_dir,'www','moaiapp.rom.js')
     Dir.chdir(config.project.root) do
-      cmd = "python #{@emscripten.home}/tools/file_packager.py #{rom_dest} --preload src/  --js-output=#{js_dest}"
+      cmd = "python #{packager} #{rom_dest} --preload src/  --js-output=#{js_dest} --as-json"
       unless system(cmd)
         bail "error building rom file"
       end
