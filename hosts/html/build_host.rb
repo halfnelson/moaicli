@@ -69,7 +69,7 @@ module BuildFile
     rom_dest = File.join(out_dir,'www','moaiapp.rom')
     js_dest = File.join(out_dir,'www','moaiapp.rom.js')
     Dir.chdir(build_config.project.root) do
-      cmd = "python #{emscripten.home}/tools/file_packager.py #{rom_dest} --preload src/  --js-output=#{js_dest}"
+      cmd = "python #{template_dir}/file_packager.py #{rom_dest} --preload src/  --js-output=#{js_dest}"
       unless system(cmd)
         bail "error building rom file"
       end
