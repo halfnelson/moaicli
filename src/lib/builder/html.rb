@@ -99,7 +99,7 @@ class HtmlBuilder < BaseBuilder
     rom_dest = File.join(out_dir,'www','moaiapp.rom')
     js_dest = File.join(out_dir,'www','moaiapp.rom.js')
     Dir.chdir(config.project.root) do
-      cmd = "python #{packager} #{rom_dest} --preload src/  --js-output=#{js_dest} --as-json"
+      cmd = "python #{packager} #{rom_dest} --preload src@/  --js-output=#{js_dest} --as-json"
       unless system(cmd)
         bail "error building rom file"
       end
