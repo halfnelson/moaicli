@@ -39,6 +39,7 @@ class HtmlBuilder < BaseBuilder
     require 'webrick'
     root = File.join(out_dir,'www')
     status "Running", "Starting web server hosting your app at http://localhost:8000/moai.html . Ctrl+C to end", :green
+    WEBrick::HTTPUtils::DefaultMimeTypes.store 'svg', 'image/svg+xml'
     server = WEBrick::HTTPServer.new :Port => 8000, :DocumentRoot => root
     trap 'INT' do server.shutdown end
     server.start
