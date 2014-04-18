@@ -1,3 +1,4 @@
+require 'lib/builder/desktop'
 class LinuxBuilder < DesktopBuilder
   def initialize(app,build_config,options)
     super(app,build_config,options)
