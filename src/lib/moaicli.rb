@@ -10,11 +10,12 @@ else
   MOAICLI_ROOT = tmp_root
 end
 
-require 'lib/app_config'
-require 'lib/helper/os_helper'
+
+
 
 
 class Platform
+  require 'lib/helper/os_helper'
   include OSHelper
 
   def type
@@ -39,6 +40,7 @@ class MoaiCLI
   attr_reader :config,:project_template_path,:sdk_root,:cache_path,:plugin_path,:libmoai_template_path,:deps_root,:hosts_root,:platform
 
   def initialize
+    require 'lib/app_config'
     @project_template_path = File.join(MOAICLI_ROOT,'templates','project')
     @libmoai_template_path = File.join(MOAICLI_ROOT,'templates','libmoai')
     @hosts_root = File.join(MOAICLI_ROOT,'hosts')
