@@ -1,12 +1,14 @@
-require "lib/helper/hosts_helper"
+
 
 command 'host install' do |c|
+
   c.syntax = "#{PROGRAM} host install <name>"
   c.description = "Installs the Moai host specified"
   c.option '--local', 'install under current project folder instead of in the shared location'
   c.option '--repository URL','git repository to find the host eg git://github.com/halfnelson/host-zipline-glut'
   c.option '--branch REF','git ref to checkout from repository'
   c.action do |args,options|
+    require "lib/helper/hosts_helper"
     name = args.first
     bail "Name is required" unless name
     options.default  :branch => 'master', :local => false

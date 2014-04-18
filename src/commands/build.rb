@@ -1,11 +1,11 @@
 #require 'lib/builder_task'
-require 'lib/helper/hosts_helper'
-require 'lib/moai_builder'
+
 
 
 
 
 command :build do |c|
+
   c.syntax = "#{PROGRAM} build <host>"
   c.description = "Builds the project for a host and places it in the distribute folder"
   c.summary = "Builds the project for a platform and host"
@@ -14,6 +14,8 @@ command :build do |c|
   c.option '--clean', 'Remove all generated build files before building'
   c.option '--release', 'Make a release build (default is debug)'
   c.action do |args,options|
+    require 'lib/helper/hosts_helper'
+    require 'lib/moai_builder'
     host_name = args.first
     bail "host_name is required" unless host_name
     app = MoaiCLI.new

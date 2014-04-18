@@ -1,16 +1,17 @@
-require 'lib/builder_task'
-require 'lib/project'
-require 'lib/host'
-require 'lib/helper/hosts_helper'
+
 
 command :start do |c|
+
   c.syntax = "#{PROGRAM} start <host_name>"
   c.description = "Runs the moai project in the current folder on the selected host"
   c.summary = "Runs the specified host"
   c.option '--platform <platform>', String, 'use the specified platform'
   c.option '--release', 'run release build (default is debug)'
   c.action do |args,options|
-
+    require 'lib/builder_task'
+    require 'lib/project'
+    require 'lib/host'
+    require 'lib/helper/hosts_helper'
     host_name = args.first
     bail "host_name is required" unless host_name
     app = MoaiCLI.new
