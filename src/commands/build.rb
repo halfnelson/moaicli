@@ -16,6 +16,9 @@ command :build do |c|
   c.action do |args,options|
     require 'lib/helper/hosts_helper'
     require 'lib/moai_builder'
+    require 'lib/project'
+    require 'lib/host'
+    require 'lib/build_config'
     host_name = args.first
     bail "host_name is required" unless host_name
     app = MoaiCLI.new

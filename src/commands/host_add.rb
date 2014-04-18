@@ -8,6 +8,8 @@ command 'host install' do |c|
   c.option '--repository URL','git repository to find the host eg git://github.com/halfnelson/host-zipline-glut'
   c.option '--branch REF','git ref to checkout from repository'
   c.action do |args,options|
+    require 'lib/project'
+    require 'lib/host'
     require "lib/helper/hosts_helper"
     name = args.first
     bail "Name is required" unless name

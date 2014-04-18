@@ -2,6 +2,10 @@ command 'sdk update' do |c|
   c.syntax = "#{PROGRAM} sdk update <HOST>"
   c.description = "updates the configured sdk for HOST from its origin (git pull)"
   c.action do |args,options|
+    require 'lib/builder_task'
+    require 'lib/project'
+    require 'lib/host'
+    require 'lib/helper/hosts_helper'
     host_name = args.first
     bail "host_name is required" unless host_name
     app = MoaiCLI.new
