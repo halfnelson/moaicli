@@ -8,3 +8,4 @@ xcopy /S hosts package\windows\hosts\
 xcopy /S templates package\windows\templates\
 xcopy /S plugins package\windows\plugins\
 xcopy dist\windows\moaicli.bat package\windows\
+xcopy /S dist\windows\jre package\windows\jre\

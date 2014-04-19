@@ -18,7 +18,7 @@ include HighlineHelper
 fix_windows_highline if os == :windows
 
 PROGRAM = 'MoaiCLI'
-VERSION = '1.0'
+VERSION = '1.5.0-rc1'
 
 Dir.glob(File.join(File.dirname(__FILE__),'commands','*.rb'))  do |filename|
   require filename
