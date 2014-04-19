@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+ROOT=`dirname $(readlink -f $0)`
+java  -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Djruby.compile.mode=OFF -jar $ROOT/moaicli.jar $*
