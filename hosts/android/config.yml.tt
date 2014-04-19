@@ -6,8 +6,6 @@
 
 package: com.getmoai.samples
 
-
-
 src_dir: .
 
 debug: true
@@ -17,13 +15,9 @@ key_alias:
 key_store_password:
 key_alias_password:
 
-
-
 project_name: <%= config.name %>
 
-
 screen_orientation: landscape
-
 
 version_code: <%= config.version_code %>
 version_name: <%= config.version_name %>

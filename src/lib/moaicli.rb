@@ -37,15 +37,13 @@ class Platform
 end
 
 class MoaiCLI
-  attr_reader :config,:project_template_path,:sdk_root,:cache_path,:plugin_path,:libmoai_template_path,:deps_root,:hosts_root,:platform
+  attr_reader :config,:project_template_path,:sdk_root,:cache_path,:deps_root,:hosts_root,:platform
 
   def initialize
     require 'lib/app_config'
     @project_template_path = File.join(MOAICLI_ROOT,'templates','project')
-    @libmoai_template_path = File.join(MOAICLI_ROOT,'templates','libmoai')
-    @hosts_root = File.join(MOAICLI_ROOT,'hosts')
-    @plugin_path = File.join(MOAICLI_ROOT,"plugins")
 
+    @hosts_root = File.join(MOAICLI_ROOT,'hosts')
 
     @platform = Platform.new()
 
