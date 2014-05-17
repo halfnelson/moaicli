@@ -16,6 +16,7 @@ key_store_password:
 key_alias_password:
 
 project_name: <%= config.name %>
+app_id: 0
 
 screen_orientation: landscape
 

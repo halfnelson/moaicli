@@ -78,16 +78,34 @@
           return res
         end
 
-        start_point = nil
-        is_tag = false
-        if has_origin_branch?(branch_name)
-          start_point = "refs/remotes/origin/" + branch_name
-        elsif has_tag?(branch_name)
-          is_tag = true
-          start_point = "refs/tags/" + branch_name
-        else
-          raise "No branch/tag #{branch_name} found"
+        has_fetched = false
+        begin
+          start_point = nil
+          is_tag = false
+          if has_origin_branch?(branch_name)
+            start_point = "refs/remotes/origin/" + branch_name
+          elsif has_tag?(branch_name)
+            is_tag = true
+            start_point = "refs/tags/" + branch_name
+          else
+            raise "No branch/tag #{branch_name} found"
+          end
+        rescue Exception => e
+            if has_fetched then
+              raise e
+            end
+            #try a fetch
+            begin
+             has_fetched = true
+             self.git.jgit.fetch().call()
+            rescue Exception => e2
+              #raise our original exception if we couldn't fetch
+              raise e
+            end
+            #after a fetch try again.
+            retry
         end
+
 
 
         if is_tag

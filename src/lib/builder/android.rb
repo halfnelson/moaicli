@@ -121,6 +121,8 @@ class AndroidBuilder < BaseBuilder
     FileUtils.mkdir_p dest('project',package_path)
 
     simple_template source_file('project','res','values','strings.xml'), dest('project','res','values','strings.xml'), '@NAME@'=>config.name
+    simple_template source_file('project','res','values','strings.xml'), dest('project','res','values','strings.xml'), '@APP_ID@'=>config.app_id
+
 
     simple_template source_file('project','.project'), dest('project','.project'), '@NAME@'=>config.project_name
     simple_template source_file('project','build.xml'), dest('project','build.xml'), '@NAME@'=>config.project_name
