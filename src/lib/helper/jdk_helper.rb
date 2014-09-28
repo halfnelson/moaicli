@@ -103,7 +103,8 @@ class WindowsJDK < JDK
   end
 
   def launch_installer
-    system("#{download_destination} /s ADDLOCAL=\"ToolsFeature,SourceFeature\"")
+    status "Launching", "#{download_destination} /s ADDLOCAL=\"ToolsFeature,SourceFeature\""
+    system("start \"installing java\" /WAIT #{download_destination} /s ADDLOCAL=\"ToolsFeature,SourceFeature\"")
   end
 
   private
@@ -134,7 +135,7 @@ def config_jdk
 
   unless jdk.installed?
     jdk.install! if agree("We couldn't find the JDK on your system, would you like to download and install it automatically?")
-    unless jdk.installed? then bail "Please install the JDK before continuing" end
+    unless jdk.installed? then bail "Please install the JDK before continuing. Or rerun this command in an administrator command prompt for me to do it for you" end
   end
 
   status "Config", "Using JDK From #{jdk.location}"
