@@ -1,6 +1,6 @@
 cd ..
-call rake rawr:clean
-call rake rawr:jar
+call jruby -S rake rawr:clean
+call jruby -S rake rawr:jar
 mkdir package\windows
 xcopy /S package\jar\*.* package\windows
 xcopy /S config package\windows\config\

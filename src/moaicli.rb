@@ -5,6 +5,7 @@ require 'lib/helper/os_helper'
 include OSHelper
 
 require 'ansicolor' if os == :windows
+
 require 'commander/import'
 require 'lib/helper/file_helper'
 require 'lib/helper/highline_helper'
@@ -18,7 +19,7 @@ include HighlineHelper
 fix_windows_highline if os == :windows
 
 PROGRAM = 'MoaiCLI'
-VERSION = '1.5.0-rc1'
+VERSION = '1.5.0-rc2'
 
 Dir.glob(File.join(File.dirname(__FILE__),'commands','*.rb'))  do |filename|
   require filename

@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/halfnelson/ansicolor.git
-  revision: a83266abd63e52bdbaada91f07ae2164e316e79f
+  revision: 5cf04e60dd998554a86b1f24d54e62b3749163f4
   specs:
     ansicolor (1.1-java)
 
