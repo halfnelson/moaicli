@@ -6,6 +6,9 @@ module MoaiBuilder
         when :windows
           require('lib/builder/windows')
           WindowsBuilder.new(app,build_config,options)
+        when :mingw
+          require('lib/builder/mingw')
+          MingwBuilder.new(app,build_config,options)
         when :android
           require('lib/builder/android')
           AndroidBuilder.new(app,build_config,options)

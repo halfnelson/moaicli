@@ -5,5 +5,6 @@ platforms:
   - linux
   - windows
   - macosx
+  - mingw
 output_directory: host-glut
   

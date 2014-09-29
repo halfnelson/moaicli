@@ -7,9 +7,9 @@ GIT
 
 GIT
   remote: git://github.com/halfnelson/ansicolor.git
-  revision: b807c2f09d70a5f3580556e5b61674b8a50ea421
+  revision: a83266abd63e52bdbaada91f07ae2164e316e79f
   specs:
-    ansicolor (1.0-java)
+    ansicolor (1.1-java)
 
 GIT
   remote: git://github.com/halfnelson/rjgit
@@ -34,6 +34,7 @@ GEM
       highline (~> 1.6.11)
     config_spartan (1.0.1)
       hashie
+    ffi (1.9.3)
     ffi (1.9.3-java)
     ffi (1.9.3-x86-mingw32)
     hashie (2.0.5)
