@@ -66,7 +66,7 @@ class BaseBuilder
 
     params.push("-DCUSTOM_HOST='#{config.host.cmake_path}'") if config.host.has_cmake_file?
 
-    params << File.join(sdk.sdk_path,'cmake')
+    params << "\"#{File.join(sdk.sdk_path,'cmake')}\""
 
     FileUtils.chdir(cmake_build_dir) do
       status "Configuring", "Configuring Build Environment"

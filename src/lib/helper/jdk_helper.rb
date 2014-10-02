@@ -104,7 +104,7 @@ class WindowsJDK < JDK
 
   def launch_installer
     status "Launching", "#{download_destination} /s ADDLOCAL=\"ToolsFeature,SourceFeature\""
-    system("start \"installing java\" /WAIT #{download_destination} /s ADDLOCAL=\"ToolsFeature,SourceFeature\"")
+    system("start \"installing java\" /WAIT \"#{download_destination}\" /s ADDLOCAL=\"ToolsFeature,SourceFeature\"")
   end
 
   private

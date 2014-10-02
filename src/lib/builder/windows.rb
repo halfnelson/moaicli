@@ -19,7 +19,7 @@ class WindowsBuilder < DesktopBuilder
       when '9', '2008'
         'Visual Studio 9'
       else
-        'Visual Studio 11'
+        false
     end
   end
 
@@ -32,7 +32,12 @@ class WindowsBuilder < DesktopBuilder
   end
 
   def cmake_platform_params
-    "-G \"#{cmake_makefile_type}\" -DBUILD_WINDOWS=true"
+    if cmake_makefile_type
+       "-G \"#{cmake_makefile_type}\" -DBUILD_WINDOWS=true"
+    else
+      "-DBUILD_WINDOWS=true" #just let cmake work it out if there is no visual studio specified.
+    end
+
   end
 
   def cmake_output_bin
